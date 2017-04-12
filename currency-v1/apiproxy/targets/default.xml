@@ -48,8 +48,14 @@
 		</Request>
 	</PostFlow>
 
-	<HTTPTargetConnection>
+	<!--<HTTPTargetConnection>
 		<URL>http://api.fixer.io/{flow.target.resource}</URL>
-	</HTTPTargetConnection>
+	</HTTPTargetConnection> -->
+	<HTTPTargetConnection>
+        <LoadBalancer>
+            <Server name="APIFixerTS"/>
+        </LoadBalancer>
+        <Path>/{flow.target.resource}</Path>
+    </HTTPTargetConnection>
 
 </TargetEndpoint>

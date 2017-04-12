@@ -1,0 +1,8 @@
+[
+    {
+        "name": "APIFixerTS",
+        "host": "api.fixer.io",
+        "isEnabled": true,
+        "port": 80
+    }
+]

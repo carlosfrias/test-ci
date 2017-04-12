@@ -3,6 +3,29 @@
 
 var Promise = require('bluebird');
 
+
+var config = require('../../test-config.json');
+var apps = require('../../devAppKeys.json');
+
+var creds = {};
+
+function getCreds(appName, productName){
+	for(var app in apps){
+  	if(apps[app].name === appName){
+    	var credentials = apps[app].credentials;
+      for(var credential in credentials){
+      	var products = credentials[credential].apiProducts;
+        for(var product in products){
+          if(products[product].apiproduct === productName){
+            creds.consumerKey = credentials[credential].consumerKey;
+            creds.consumerSecret = credentials[credential].consumerSecret;
+          }
+        }
+      }
+    }
+  }
+}
+
 var assertSuccessfulApiResponse = function(apickli) {
 	return new Promise(function(resolve, reject) {
 		if (!apickli.scenarioVariables.isResponseSuccessful) {
@@ -27,24 +50,29 @@ var assertSuccessfulApiResponse = function(apickli) {
 
 module.exports = function() {
 
+	this.registerHandler("BeforeFeatures", function(event, next) {
+    	getCreds(config.currencyApi.app, config.currencyApi.product);
+      	return next();
+  	});
+
 	this.When(/^I request all exchange rates with default values$/, {timeout: 60 * 1000}, function(callback) {
-		this.apickli.get('/rates', callback);
+		this.apickli.get('/rates?apikey='+creds.consumerKey, callback);
 	});
 
 	this.When(/^I request all exchange rates with (.{3}) as the base currency$/, {timeout: 60 * 1000}, function(base, callback) {
 		this.apickli.queryParameters.base = base;
-		this.apickli.get('/rates', callback);
+		this.apickli.get('/rates?apikey='+creds.consumerKey, callback);
 	});
 
 	this.When(/^I request all exchange rates for (.*)$/, {timeout: 60 * 1000}, function(date, callback) {
 		this.apickli.queryParameters.date = date;
-		this.apickli.get('/rates', callback);
+		this.apickli.get('/rates?apikey='+creds.consumerKey, callback);
 	});
 
 	this.When(/^I request all exchange rates with (.{3}) as the base currency for (.*)$/, function(base, date, callback) {
 		this.apickli.queryParameters.base = base;
 		this.apickli.queryParameters.date = date;
-		this.apickli.get('/rates', callback);
+		this.apickli.get('/rates?apikey='+creds.consumerKey, callback);
 	});
 
 	this.Then(/^I should see (.*) as the base currency$/, function(base, callback) {

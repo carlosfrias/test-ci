@@ -44,11 +44,11 @@
 				<apigee.env>test</apigee.env>
 				<apigee.hosturl>https://api.enterprise.apigee.com</apigee.hosturl>
 				<apigee.apiversion>v1</apigee.apiversion>
-				<apigee.org>${env.APIGEE_ORG}</apigee.org>
-				<apigee.username>${env.APIGEE_USERNAME}</apigee.username>
-				<apigee.password>${env.APIGEE_PASSWORD}</apigee.password>
+				<apigee.org>${org}</apigee.org>
+				<apigee.username>${username}</apigee.username>
+				<apigee.password>${password}</apigee.password>
 				<apigee.options>update</apigee.options>
-				<api.northbound.domain>${env.API_DOMAIN_TEST}</api.northbound.domain>
+				<api.northbound.domain>${org}-test.apigee.net</api.northbound.domain>
 				<api.testtag>~@wip</api.testtag>
 			</properties>
 		</profile>
@@ -59,12 +59,12 @@
 				<apigee.env>prod</apigee.env>
 				<apigee.hosturl>https://api.enterprise.apigee.com</apigee.hosturl>
 				<apigee.apiversion>v1</apigee.apiversion>
-				<apigee.org>${env.APIGEE_ORG}</apigee.org>
-				<apigee.username>${env.APIGEE_USERNAME}</apigee.username>
-				<apigee.password>${env.APIGEE_PASSWORD}</apigee.password>
+				<apigee.org>${org}</apigee.org>
+				<apigee.username>${username}</apigee.username>
+				<apigee.password>${password}</apigee.password>
 				<apigee.options>override</apigee.options>
 				<apigee.override.delay>5</apigee.override.delay>
-				<api.northbound.domain>${env.API_DOMAIN_PROD}</api.northbound.domain>
+				<api.northbound.domain>${org}-prod.apigee.net</api.northbound.domain>
 				<api.testtag>~@wip,~@mock</api.testtag>
 			</properties>
 		</profile>
@@ -78,6 +78,11 @@
 					<groupId>io.apigee.build-tools.enterprise4g</groupId>
 					<artifactId>apigee-edge-maven-plugin</artifactId>
 					<version>1.1.0</version>
+				</plugin>
+				<plugin>
+					<groupId>com.apigee.edge.config</groupId>
+					<artifactId>apigee-config-maven-plugin</artifactId>
+					<version>1.1.4</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -127,6 +132,7 @@
 									<includes>
 										<include>apiproxy/**</include>
 										<include>test/integration/**</include>
+										<include>resources/**</include>
 									</includes>
 								</resource>
 							</resources>
@@ -156,6 +162,7 @@
 						<include>apiproxy/proxies/loggly.xml</include>
 						<include>test/integration/test-config.json</include>
 						<include>apiproxy/currency-v1.xml</include>
+						<include>resources/edge/org/apiProducts.json</include>
 					</includes>
 					<replacements>
 						<replacement>
@@ -165,6 +172,10 @@
 						<replacement>
 							<token>demo-test.apigee.net</token>
 							<value>${api.northbound.domain}</value>
+						</replacement>
+						<replacement>
+							<token>currency-v1</token>
+							<value>currency-${deployment.suffix}v1</value>
 						</replacement>
 						<replacement>
 							<token>@description</token>
@@ -197,6 +208,62 @@
 			</plugin>
 
 			<plugin>
+                <groupId>com.apigee.edge.config</groupId>
+                <artifactId>apigee-config-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>create-config-cache</id>
+                        <phase>verify</phase>                        
+                        <goals>
+                            <goal>caches</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>create-config-kvm</id>
+                        <phase>verify</phase>                        
+                        <goals>
+                            <goal>keyvaluemaps</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>create-config-targetserver</id>
+                        <phase>verify</phase>                        
+                        <goals>
+                            <goal>targetservers</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>create-config-apiproduct</id>
+                        <phase>install</phase>                        
+                        <goals>
+                            <goal>apiproducts</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>create-config-developer</id>
+                        <phase>install</phase>                        
+                        <goals>
+                            <goal>developers</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>create-config-app</id>
+                        <phase>install</phase>                        
+                        <goals>
+                            <goal>apps</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>export-config-app</id>
+                        <phase>install</phase>                        
+                        <goals>
+                            <goal>exportAppKeys</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin> 
+
+            <plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>1.3.2</version>
@@ -260,28 +327,6 @@
 				</executions>
 			</plugin>
 
-			<!-- cleaning dirs -->
-			<!-- <plugin>
-				<artifactId>maven-clean-plugin</artifactId>
-				<version>2.5</version>
-
-				<executions>
-					<execution>
-						<id>auto-clean-init</id>
-						<phase>initialize</phase>
-						<goals>
-							<goal>clean</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>auto-clean-install</id>
-						<phase>install</phase>
-						<goals>
-							<goal>clean</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin> -->
 		</plugins>
 	</build>
 
