@@ -22,7 +22,7 @@ pipeline {
         }
         stage('Pre-Deployment Configurations') {
           steps {
-            sh "mvn -f ${project_dir}/pom.xml apigee-config:caches apigee-config:keyvaluemaps apigee-config:targetservers -P${params.PROFILE} -Dorg=${params.APIGEE_ORG} -Dusername=${params.APIGEE_USERNAME} -Dpassword=${params.APIGEE_PASSWORD} -Dapigee.config.dir=./target/resources/edge -Dapigee.config.options=create"
+            sh "mvn -X -f ${project_dir}/pom.xml apigee-config:caches apigee-config:keyvaluemaps apigee-config:targetservers -P${params.PROFILE} -Dorg=${params.APIGEE_ORG} -Dusername=${params.APIGEE_USERNAME} -Dpassword=${params.APIGEE_PASSWORD} -Dapigee.config.dir=./target/resources/edge -Dapigee.config.options=create"
           }
         }
         stage('Build proxy bundle') {
