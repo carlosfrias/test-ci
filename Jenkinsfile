@@ -17,7 +17,7 @@ pipeline {
         }
         stage('install') {
           steps {
-            sh "mvn -f ${project_dir}/pom.xml install -P${params.profile} -Dorg=${params.org} -Dusername=${params.username} -Dpassword=${params.password} -Ddeployment.suffix=${params.deployment_suffix} -Dapigee.config.dir=./target/resources/edge -Dapigee.config.options=create -Dapigee.config.exportDir=./target/test/integration"
+            sh "mvn -f ${project_dir}/pom.xml install -P${params.profile} -Dorg=${params.org} -Dusername=${params.username} -Dpassword=${params.password} -Ddeployment.suffix=${params.deployment_suffix} -Dapigee.config.dir=./${project_dir}/target/resources/edge -Dapigee.config.options=create -Dapigee.config.exportDir=./${project_dir}/target/test/integration"
           }
         }
         stage('coverage report') {
