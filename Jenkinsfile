@@ -1,5 +1,18 @@
 #!groovy
 def project_dir = 'currency-v1'
+
+def mvnCmd = ["mvn"]
+mvnCmd << "-f ${project_dir}/pom.xml"
+mvnCmd << "install"
+mvnCmd << "-P${params.profile}"
+mvnCmd << "-Dorg=${params.org}"
+mvnCmd << "-Dusername=${params.username}"
+mvnCmd << "-Dpassword=${params.password}"
+mvnCmd << "-Ddeployment.suffix=${params.deployment_suffix}"
+mvnCmd << "-Dapigee.config.dir=${project_dir}/target/resources/edge"
+mvnCmd << "-Dapigee.config.options=create"
+mvnCmd << "-Dapigee.config.exportDir=${project_dir}/target/test/integration"
+
 pipeline {
     agent any
 
@@ -17,17 +30,6 @@ pipeline {
         }
         stage('install') {
             steps {
-                def mvnCmd = ["mvn"]
-                mvnCmd << "-f ${project_dir}/pom.xml"
-                mvnCmd << "install"
-                mvnCmd << "-P${params.profile}"
-                mvnCmd << "-Dorg=${params.org}"
-                mvnCmd << "-Dusername=${params.username}"
-                mvnCmd << "-Dpassword=${params.password}"
-                mvnCmd << "-Ddeployment.suffix=${params.deployment_suffix}"
-                mvnCmd << "-Dapigee.config.dir=${project_dir}/target/resources/edge"
-                mvnCmd << "-Dapigee.config.options=create"
-                mvnCmd << "-Dapigee.config.exportDir=${project_dir}/target/test/integration"
                 sh mvnCmd.join(' ')
             }
         }
