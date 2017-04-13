@@ -11,12 +11,18 @@ pipeline {
                 sh 'npm --version'
                  }
         }
-        /**
         stage('Clean') {
             steps {
                 sh "mvn -f ${project_dir}/pom.xml clean"
            }
         }
+        stage('Static Code Analysis, Unit Test, Coverage and Install') {
+            steps {
+              sh "mvn -f ${project_dir}/pom.xml install -P${params.profile} -Ddeployment.suffix=${params.deployment_suffix} -Dorg=${params.org} -Dusername=${params.username} -Dpassword=${params.password} -Dapigee.config.dir=${project_dir}/target/resources/edge -Dapigee.config.options=create -Dapigee.config.exportDir=${project_dir}/target/test/integration"
+            }
+        }
+
+        /**
         stage('Static Code Analysis, Unit Test and Coverage') {
             steps {
               sh "mvn -f ${project_dir}/pom.xml test -P${params.profile} -Ddeployment.suffix=${params.deployment_suffix} -Dorg=${params.org} -Dusername=${params.username} -Dpassword=${params.password} -Dapigee.config.dir=${project_dir}/target/resources/edge -Dapigee.config.options=create -Dapigee.config.exportDir=${project_dir}/target/test/integration"
@@ -47,12 +53,12 @@ pipeline {
             sh "mvn -f ${project_dir}/pom.xml apigee-config:exportAppKeys -P${params.profile} -Dorg=${params.org} -Dusername=${params.username} -Dpassword=${params.password} -Dapigee.config.dir=${project_dir}/target/resources/edge -Dapigee.config.exportDir=./${project_dir}/target/test/integration"
           }
         }
-        */
         stage('Functional Test') {
           steps {
             sh "node ${project_dir}/node_modules/cucumber/bin/cucumber.js ${project_dir}/target/test/integration/features --format json:${project_dir}/target/reports.json"
           }
         }
+        */
         stage('Coverage Test Report') {
           steps {
             publishHTML(target: [
