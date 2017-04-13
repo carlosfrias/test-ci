@@ -4,7 +4,7 @@
 var config = require('../../test-config.json');
 var apps = require('../../devAppKeys.json');
 
-console.log('currency api: [' + config.currencyApi.domain + ', ' + config.currencyApi.basepath + ']');
+console.log('currency api: [' + config.currencyApi.app + ', ' + config.currencyApi.product + ']');
 console.log(JSON.stringify(apps));
 
 
