@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Clean') {
             steps {
-                sh "mvn pom.xml clean"
+                sh "mvn clean"
            }
         }
         stage('Static Code Analysis, Unit Test and Coverage') {
