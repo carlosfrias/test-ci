@@ -27,12 +27,12 @@ function getCreds(appName, productName){
   }
 }
 
-console.log(JSON.stringify(creds));
 
 module.exports = function() {
 
 	this.registerHandler("BeforeFeatures", function(event, next) {
     	getCreds(config.currencyApi.app, config.currencyApi.product);
+				console.log(JSON.stringify(creds));
       	return next();
   	});
 	
