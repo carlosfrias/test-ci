@@ -48,7 +48,7 @@ pipeline {
         }
         stage('Functional Test') {
           steps {
-            sh "node ${project_dir}/node_modules/cucumber/bin/cucumber.js ${project_dir}/target/test/integration/features --tags ${api.testtag} --format json:${project_dir}/target/reports.json"
+            sh "node ${project_dir}/node_modules/cucumber/bin/cucumber.js ${project_dir}/target/test/integration/features --format json:${project_dir}/target/reports.json"
           }
         }
         stage('Coverage Test Report') {
