@@ -4,6 +4,10 @@
 var config = require('../../test-config.json');
 var apps = require('../../devAppKeys.json');
 
+console.log('currency api: [' + config.currencyApi.domain + ', ' + config.currencyApi.basepath + ']');
+console.log(JSON.stringify(apps));
+
+
 var creds = {};
 
 function getCreds(appName, productName){
@@ -22,6 +26,8 @@ function getCreds(appName, productName){
     }
   }
 }
+
+console.log(JSON.stringify(creds));
 
 module.exports = function() {
 
