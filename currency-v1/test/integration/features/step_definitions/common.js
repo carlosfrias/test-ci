@@ -1,8 +1,8 @@
 /* jslint node: true */
 'use strict';
 
-var config = require('../../../test-config.json');
-var apps = require('../../../devAppKeys.json');
+var config = require('../../test-config.json');
+var apps = require('../../devAppKeys.json');
 
 var creds = {};
 
