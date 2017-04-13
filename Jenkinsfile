@@ -8,6 +8,7 @@ pipeline {
           steps {
                 sh 'mvn --version'
                 sh 'npm --version'
+                sh 'node --version'
                  }
         }
         stage('Clean') {
