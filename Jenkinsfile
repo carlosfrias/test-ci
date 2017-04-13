@@ -35,7 +35,15 @@ pipeline {
         }
         stage('coverage report') {
           steps {
-            publishHTML(target: [allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'currency-v1/target/coverage/lcov-report', reportFiles: 'index.html', reportName: 'HTML Report'])
+            publishHTML(target: [
+                                  allowMissing: false,
+                                  alwaysLinkToLastBuild: false,
+                                  keepAll: false,
+                                  reportDir: 'currency-v1/target/coverage/lcov-report',
+                                  reportFiles: 'index.html',
+                                  reportName: 'HTML Report'
+                                ]
+                        )
           }
         }
 
