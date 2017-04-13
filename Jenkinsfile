@@ -1,18 +1,6 @@
 #!groovy
 def project_dir = 'currency-v1'
 
-def mvnCmd = ["mvn"]
-mvnCmd << "-f ${project_dir}/pom.xml"
-mvnCmd << "install"
-mvnCmd << "-P${params.profile}"
-mvnCmd << "-Dorg=${params.org}"
-mvnCmd << "-Dusername=${params.username}"
-mvnCmd << "-Dpassword=${params.password}"
-mvnCmd << "-Ddeployment.suffix=${params.deployment_suffix}"
-mvnCmd << "-Dapigee.config.dir=${project_dir}/target/resources/edge"
-mvnCmd << "-Dapigee.config.options=create"
-mvnCmd << "-Dapigee.config.exportDir=${project_dir}/target/test/integration"
-
 pipeline {
     agent any
 
@@ -28,26 +16,55 @@ pipeline {
                 sh "mvn -f ${project_dir}/pom.xml clean"
            }
         }
-        stage('install') {
+        stage('Static Code Analysis, Unit Test and Coverage') {
             steps {
-                sh mvnCmd.join(' ')
+              sh "mvn -f ${project_dir}/pom.xml test -P${params.profile} -Ddeployment.suffix=${params.deployment_suffix} -Dorg=${params.org} -Dusername=${params.username} -Dpassword=${params.password} -Dapigee.config.dir=${project_dir}/target/resources/edge -Dapigee.config.options=create -Dapigee.config.exportDir=${project_dir}/target/test/integration"
             }
         }
-        stage('coverage report') {
+        stage('Pre-Deployment Configurations') {
+          steps {
+            sh "mvn -f ${project_dir}/pom.xml apigee-config:caches apigee-config:keyvaluemaps apigee-config:targetservers -P${params.profile} -Dorg=${params.org} -Dusername=${params.username} -Dpassword=${params.password} -Dapigee.config.dir=${project_dir}/target/resources/edge -Dapigee.config.options=create"
+          }
+        }
+        stage('Build proxy bundle') {
+          steps {
+            sh "mvn -f ${project_dir}/pom.xml apigee-enterprise:configure -P${params.profile} -Dorg=${params.org} -Dusername=${params.username} -Dpassword=${params.password}"
+          }
+        }
+        stage('Deploy proxy bundle') {
+          steps {
+            sh "mvn -f ${project_dir}/pom.xml apigee-enterprise:deploy -P${params.profile} -Dorg=${params.org} -Dusername=${params.username} -Dpassword=${params.password}"
+          }
+        }
+        stage('Post-Deployment Configurations') {
+          steps {
+            sh "mvn -f ${project_dir}/pom.xml apigee-config:apiproducts apigee-config:developers apigee-config:apps -P${params.profile} -Dorg=${params.org} -Dusername=${params.username} -Dpassword=${params.password} -Dapigee.config.dir=${project_dir}/target/resources/edge -Dapigee.config.options=create"
+          }
+        }
+        stage('Export Dev App Keys') {
+          steps {
+            sh "mvn -f ${project_dir}/pom.xml apigee-config:exportAppKeys -P${params.profile} -Dorg=${params.org} -Dusername=${params.username} -Dpassword=${params.password} -Dapigee.config.dir=${project_dir}/target/resources/edge -Dapigee.config.exportDir=${project_dir}/target/test/integration"
+          }
+        }
+        stage('Functional Test') {
+          steps {
+            sh "node ${project_dir}/node_modules/cucumber/bin/cucumber.js ${project_dir}/target/test/integration/features --tags ${api.testtag} --format json:${project_dir}/target/reports.json"
+          }
+        }
+        stage('Coverage Test Report') {
           steps {
             publishHTML(target: [
                                   allowMissing: false,
                                   alwaysLinkToLastBuild: false,
                                   keepAll: false,
-                                  reportDir: 'currency-v1/target/coverage/lcov-report',
+                                  reportDir: "${project_dir}/target/coverage/lcov-report",
                                   reportFiles: 'index.html',
                                   reportName: 'HTML Report'
                                 ]
                         )
           }
         }
-
-        stage('cucumber report') {
+        stage('Functional Test Report') {
             steps {
                 step([
                     $class: 'CucumberReportPublisher',
