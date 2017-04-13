@@ -17,7 +17,7 @@ pipeline {
         }
         stage('install') {
             steps {
-                mvnCmd = ["mvn"]
+                def mvnCmd = ["mvn"]
                 mvnCmd << "-f ${project_dir}/pom.xml"
                 mvnCmd << "install"
                 mvnCmd << "-P${params.profile}"
