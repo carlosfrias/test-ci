@@ -28,12 +28,12 @@ pipeline {
         }
         stage('Build proxy bundle') {
           steps {
-            sh "mvn apigee-enterprise:configure -P${params.profile} -Dorg=${params.org} -Dusername=${params.username} -Dpassword=${params.password}"
+            sh "mvn apigee-enterprise:configure -P${params.profile} -Ddeployment.suffix=${params.deployment_suffix} -Dorg=${params.org} -Dusername=${params.username} -Dpassword=${params.password}"
           }
         }
         stage('Deploy proxy bundle') {
           steps {
-            sh "mvn apigee-enterprise:deploy -P${params.profile} -Dorg=${params.org} -Dusername=${params.username} -Dpassword=${params.password}"
+            sh "mvn apigee-enterprise:deploy -P${params.profile} -Ddeployment.suffix=${params.deployment_suffix} -Dorg=${params.org} -Dusername=${params.username} -Dpassword=${params.password}"
           }
         }
         stage('Post-Deployment Configurations') {
@@ -48,7 +48,6 @@ pipeline {
         }
         stage('Functional Test') {
           steps {
-            //sh "node ./node_modules/cucumber/bin/cucumber.js target/test/integration/features --format json:target/reports.json"
             sh "mvn exec:exec@integration"
           }
         }
