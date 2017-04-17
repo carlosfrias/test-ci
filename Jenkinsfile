@@ -43,7 +43,7 @@ pipeline {
         }
         stage('Export Dev App Keys') {
           steps {
-            sh "mvn apigee-config:exportAppKeys -P${params.profile} -Dorg=${params.org} -Dusername=${params.username} -Dpassword=${params.password} -Dapigee.config.dir=target/resources/edge -Dapigee.config.exportDir=./target/test/integration"
+            sh "mvn apigee-config:exportAppKeys -P${params.profile} -Ddeployment.suffix=${params.deployment_suffix} -Dorg=${params.org} -Dusername=${params.username} -Dpassword=${params.password} -Dapigee.config.dir=target/resources/edge -Dapigee.config.exportDir=./target/test/integration"
           }
         }
         stage('Functional Test') {
