@@ -42,12 +42,12 @@ pipeline {
             sh "mvn apigee-config:apiproducts apigee-config:developers apigee-config:apps -P${params.profile} -Dorg=${params.org} -Dusername=${params.username} -Dpassword=${params.password} -Dapigee.config.dir=target/resources/edge -Dapigee.config.options=create"
           }
         }
+        */
         stage('Export Dev App Keys') {
           steps {
             sh "mvn apigee-config:exportAppKeys -P${params.profile} -Ddeployment.suffix=${params.deployment_suffix} -Dorg=${params.org} -Dusername=${params.username} -Dpassword=${params.password} -Dapigee.config.dir=target/resources/edge -Dapigee.config.exportDir=./target/test/integration"
           }
         }
-        */
         stage('Functional Test') {
           steps {
             sh "node ./node_modules/cucumber/bin/cucumber.js target/test/integration/features --format json:target/reports.json"
