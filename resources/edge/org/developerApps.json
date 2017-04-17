@@ -1,0 +1,13 @@
+{
+    "test@api.com": [
+        {
+            "apiProducts": [
+                "CurrencyProduct"
+            ],
+            "callbackUrl": "",
+            "name": "CurrencyApp",
+            "scopes": []
+        }
+    ]
+}
+
