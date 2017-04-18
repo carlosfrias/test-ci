@@ -4,7 +4,7 @@
 def mvnHome = '/usr/share/maven/apache-maven-3.3.9'
 pipeline {
     agent {
-        node("slave")
+        node("any")
     }
     stages {
         stage("Show tool versions") {
