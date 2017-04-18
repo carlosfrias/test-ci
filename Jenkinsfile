@@ -4,7 +4,7 @@ pipeline {
     agent any
     tools {
       maven 'Maven 3.3.9'
-      nodejs "NodeJS Plugin"
+      nodejs "NodeJS1.2.0"
     }
     stages {
         stage("Show tool versions") {
