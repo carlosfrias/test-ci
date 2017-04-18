@@ -1,10 +1,10 @@
 #!groovy
 
-node {
-    pipeline {
-        agent any
-        def mvnHome = tool name: 'Maven 3.3.9', type: 'maven'
-        stages {
+pipeline {
+    agent any
+    def mvnHome = tool name: 'Maven 3.3.9', type: 'maven'
+    stages {
+        node {
             stage("Show tool versions") {
               steps {
                     sh "${mvnHome}/bin/mvn --version"
