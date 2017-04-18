@@ -1,9 +1,8 @@
 #!groovy
 
+def mvnHome = tool name: 'Maven 3.3.9', type: 'maven'
 pipeline {
     agent any
-    def mvnHome = tool name: 'Maven 3.3.9', type: 'maven'
-    stages {
         node {
             stage("Show tool versions") {
               steps {
@@ -84,6 +83,5 @@ pipeline {
                 }
             }
         }
-    }
 }
 
