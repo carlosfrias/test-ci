@@ -5,6 +5,7 @@ pipeline {
     agent any
     tools {
       maven 'Maven 3.3.9'
+      npm 'pipeline-npm:0.9.1'
     }
     stages {
         stage("Show tool versions") {
