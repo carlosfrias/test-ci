@@ -1,18 +1,17 @@
 #!groovy
 
-//def mvnHome = '/usr/share/maven/apache-maven-3.3.9'
 pipeline {
     agent any
     tools {
       maven 'Maven 3.3.9'
-      npm 'pipeline-npm:0.9.1'
+      //npm 'pipeline-npm:0.9.1'
     }
     stages {
         stage("Show tool versions") {
             steps {
                   sh "mvn --version"
-                  sh 'npm --version'
-                  sh 'node --version'
+                  //sh 'npm --version'
+                  //sh 'node --version'
             }
         }
         stage('Clean') {
@@ -50,12 +49,14 @@ pipeline {
             sh "mvn apigee-config:exportAppKeys -P${params.profile} -Ddeployment.suffix=${params.deployment_suffix} -Dorg=${params.org} -Dusername=${params.username} -Dpassword=${params.password} -Dapigee.config.dir=target/resources/edge -Dapigee.config.exportDir=./target/test/integration"
           }
         }
+        /**
         stage('Functional Test') {
           steps {
             sh "node ./node_modules/cucumber/bin/cucumber.js target/test/integration/features --format json:target/reports.json"
             //sh "${mvnHome}/bin/mvn exec:exec@integration"
           }
         }
+        */
         stage('Coverage Test Report') {
           steps {
             publishHTML(target: [
