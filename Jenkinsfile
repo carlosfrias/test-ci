@@ -1,7 +1,7 @@
 #!groovy
 
 //def mvnHome = tool name: 'Maven 3.3.9', type: 'maven'
-def mvnHome = '/usr/share/maven'
+def mvnHome = '/usr/share/maven/apache-maven-3.3.9'
 pipeline {
     agent any
     stages {
