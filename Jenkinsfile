@@ -2,7 +2,7 @@
 
 def mvnHome = tool name: 'Maven 3.3.9', type: 'maven'
 pipeline {
-    agent none
+    agent any
     stages {
         stage("Show tool versions") {
             steps {
