@@ -5,7 +5,7 @@ pipeline {
     tools {
       maven 'Maven 3.3.9'
       //npm 'pipeline-npm:0.9.1'
-      nodejs
+      nodejs 'NodeJS 1.2.0'
     }
     stages {
         stage("Show tool versions") {
