@@ -4,7 +4,7 @@ pipeline {
     agent any
     tools {
       maven 'Maven 3.3.9'
-      node "nodejs-1.2.0"
+      //node "nodejs-1.2.0"
       tool name: 'node-6.10.1', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
     }
     stages {
