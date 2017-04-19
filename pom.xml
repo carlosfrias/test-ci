@@ -50,7 +50,7 @@
         <apigee.username>${username}</apigee.username>
         <apigee.password>${password}</apigee.password>
         <apigee.options>update</apigee.options>
-        <api.northbound.domain>http://10.16.6.134:8090</api.northbound.domain>
+        <api.northbound.domain>10.16.6.134:8090</api.northbound.domain>
         <api.testtag>~@wip</api.testtag>
       </properties>
     </profile>
