@@ -49,14 +49,12 @@ pipeline {
             sh "mvn apigee-config:exportAppKeys -P${params.profile} -Ddeployment.suffix=${params.deployment_suffix} -Dorg=${params.org} -Dusername=${params.username} -Dpassword='${params.password}' -Dapigee.config.dir=target/resources/edge -Dapigee.config.exportDir=./target/test/integration"
           }
         }
-        /**
         stage('Functional Test') {
           steps {
             sh "node ./node_modules/cucumber/bin/cucumber.js target/test/integration/features --format json:target/reports.json"
             //sh "${mvnHome}/bin/mvn exec:exec@integration"
           }
         }
-        */
         stage('Coverage Test Report') {
           steps {
             publishHTML(target: [
