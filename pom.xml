@@ -44,7 +44,7 @@
       <properties>
         <apigee.profile>test</apigee.profile>
         <apigee.env>test</apigee.env>
-        <apigee.hosturl>https://api.enterprise.apigee.com</apigee.hosturl>
+        <apigee.hosturl>http://rhldcapimmscs701.na.rccl.com</apigee.hosturl>
         <apigee.apiversion>v1</apigee.apiversion>
         <apigee.org>${org}</apigee.org>
         <apigee.username>${username}</apigee.username>
@@ -55,11 +55,11 @@
       </properties>
     </profile>
     <profile>
-      <id>rccl_test</id>
+      <id>apigee_sample_test</id>
       <properties>
-        <apigee.profile>rccl_test</apigee.profile>
+        <apigee.profile>apigee_sample_test</apigee.profile>
         <apigee.env>test</apigee.env>
-        <apigee.hosturl>c</apigee.hosturl>
+        <apigee.hosturl>https://api.enterprise.apigee.com</apigee.hosturl>
         <apigee.apiversion>v1</apigee.apiversion>
         <apigee.org>${org}</apigee.org>
         <apigee.username>${username}</apigee.username>
