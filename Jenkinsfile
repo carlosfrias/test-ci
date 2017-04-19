@@ -1,6 +1,6 @@
 #!groovy
 
-def assembleParameters() {
+def assembleParameters = {
    def params = ['-P']
    params << "'${params.profile}'"
    params << "-Ddeployment.suffix='${params.deployment_suffix}'"
