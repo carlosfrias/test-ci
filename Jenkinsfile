@@ -21,32 +21,32 @@ pipeline {
         }
         stage('Static Code Analysis, Unit Test and Coverage') {
             steps {
-              sh "mvn test -P${params.profile} -Ddeployment.suffix=${params.deployment_suffix} -Dorg=${params.org} -Dusername=${params.username} -Dpassword='${params.password}' -Dapigee.config.dir=target/resources/edge -Dapigee.config.options=create -Dapigee.config.exportDir=./target/test/integration"
+              sh 'mvn test -P${params.profile} -Ddeployment.suffix=${params.deployment_suffix} -Dorg=${params.org} -Dusername=${params.username} -Dpassword="${params.password}" -Dapigee.config.dir=target/resources/edge -Dapigee.config.options=create -Dapigee.config.exportDir=./target/test/integration'
             }
         }
         stage('Pre-Deployment Configurations') {
             steps {
-              sh "mvn apigee-config:caches apigee-config:keyvaluemaps apigee-config:targetservers -P${params.profile} -Dorg=${params.org} -Dusername=${params.username} -Dpassword='${params.password}' -Dapigee.config.dir=target/resources/edge -Dapigee.config.options=create"
+              sh 'mvn apigee-config:caches apigee-config:keyvaluemaps apigee-config:targetservers -P${params.profile} -Dorg=${params.org} -Dusername=${params.username} -Dpassword="${params.password}" -Dapigee.config.dir=target/resources/edge -Dapigee.config.options=create'
             }
         }
         stage('Build proxy bundle') {
             steps {
-              sh "mvn apigee-enterprise:configure -P${params.profile} -Ddeployment.suffix=${params.deployment_suffix} -Dorg=${params.org} -Dusername=${params.username} -Dpassword='${params.password}'"
+              sh 'mvn apigee-enterprise:configure -P${params.profile} -Ddeployment.suffix=${params.deployment_suffix} -Dorg=${params.org} -Dusername=${params.username} -Dpassword="${params.password}"'
             }
         }
         stage('Deploy proxy bundle') {
             steps {
-              sh "mvn apigee-enterprise:deploy -P${params.profile} -Ddeployment.suffix=${params.deployment_suffix} -Dorg=${params.org} -Dusername=${params.username} -Dpassword='${params.password}'"
+              sh 'mvn apigee-enterprise:deploy -P${params.profile} -Ddeployment.suffix=${params.deployment_suffix} -Dorg=${params.org} -Dusername=${params.username} -Dpassword="${params.password}"'
             }
         }
         stage('Post-Deployment Configurations') {
           steps {
-            sh "mvn apigee-config:apiproducts apigee-config:developers apigee-config:apps -P${params.profile} -Dorg=${params.org} -Dusername=${params.username} -Dpassword='${params.password}' -Dapigee.config.dir=target/resources/edge -Dapigee.config.options=create"
+            sh 'mvn apigee-config:apiproducts apigee-config:developers apigee-config:apps -P${params.profile} -Dorg=${params.org} -Dusername=${params.username} -Dpassword="${params.password}" -Dapigee.config.dir=target/resources/edge -Dapigee.config.options=create'
           }
         }
         stage('Export Dev App Keys') {
           steps {
-            sh "mvn apigee-config:exportAppKeys -P${params.profile} -Ddeployment.suffix=${params.deployment_suffix} -Dorg=${params.org} -Dusername=${params.username} -Dpassword='${params.password}' -Dapigee.config.dir=target/resources/edge -Dapigee.config.exportDir=./target/test/integration"
+            sh 'mvn apigee-config:exportAppKeys -P${params.profile} -Ddeployment.suffix=${params.deployment_suffix} -Dorg=${params.org} -Dusername=${params.username} -Dpassword="${params.password}" -Dapigee.config.dir=target/resources/edge -Dapigee.config.exportDir=./target/test/integration'
           }
         }
         stage('Functional Test') {
