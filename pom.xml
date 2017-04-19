@@ -44,7 +44,7 @@
       <properties>
         <apigee.profile>test</apigee.profile>
         <apigee.env>test</apigee.env>
-        <apigee.hosturl>http://rhldcapimmscs701.na.rccl.com</apigee.hosturl>
+        <apigee.hosturl>http://rhldcapimmscs701.na.rccl.com:8080</apigee.hosturl>
         <apigee.apiversion>v1</apigee.apiversion>
         <apigee.org>${org}</apigee.org>
         <apigee.username>${username}</apigee.username>
