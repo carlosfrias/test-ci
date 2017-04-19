@@ -29,14 +29,14 @@ pipeline {
               sh "mvn apigee-config:caches -P${params.profile} -Dorg=${params.org} -Dusername=${params.username} -Dpassword=\"${params.password}\" -Dapigee.config.dir=target/resources/edge -Dapigee.config.options=create"
             }
         }
-        stage('Pre-Deployment Configurations of Key Value Maps') {
-            steps {
-              sh "mvn apigee-config:keyvaluemaps -P${params.profile} -Dorg=${params.org} -Dusername=${params.username} -Dpassword=\"${params.password}\" -Dapigee.config.dir=target/resources/edge -Dapigee.config.options=create"
-            }
-        }
         stage('Pre-Deployment Configurations of Target Servers') {
             steps {
               sh "mvn apigee-config:targetservers -P${params.profile} -Dorg=${params.org} -Dusername=${params.username} -Dpassword=\"${params.password}\" -Dapigee.config.dir=target/resources/edge -Dapigee.config.options=create"
+            }
+        }
+        stage('Pre-Deployment Configurations of Key Value Maps') {
+            steps {
+              sh "mvn apigee-config:keyvaluemaps -P${params.profile} -Dorg=${params.org} -Dusername=${params.username} -Dpassword=\"${params.password}\" -Dapigee.config.dir=target/resources/edge -Dapigee.config.options=create"
             }
         }
         stage('Build proxy bundle') {
