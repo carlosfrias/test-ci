@@ -1,6 +1,6 @@
 #!groovy
 
-def assembleParameters() {
+def assembleParameters = {
    def params = ['-P']
    params << "'${params.profile}'"
    params << "-Ddeployment.suffix='${params.deployment_suffix}'"
@@ -31,32 +31,32 @@ pipeline {
         }
         stage('Static Code Analysis, Unit Test and Coverage') {
             steps {
-              sh "mvn test ${assembleParameters()} -Dapigee.config.dir=./target/resources/edge -Dapigee.config.options=create -Dapigee.config.exportDir=./target/test/integration"
+              sh "mvn test ${assembleParameters} -Dapigee.config.dir='./target/resources/edge' -Dapigee.config.options=create -Dapigee.config.exportDir='./target/test/integration'"
             }
         }
         stage('Pre-Deployment Configurations') {
             steps {
-              sh "mvn apigee-config:caches apigee-config:keyvaluemaps apigee-config:targetservers ${assembleParameters()} -Dapigee.config.dir=target/resources/edge -Dapigee.config.options=create"
+              sh "mvn apigee-config:caches apigee-config:keyvaluemaps apigee-config:targetservers ${assembleParameters} -Dapigee.config.dir=target/resources/edge -Dapigee.config.options=create"
             }
         }
         stage('Build proxy bundle') {
             steps {
-              sh "mvn apigee-enterprise:configure ${assembleParameters()}"
+              sh "mvn apigee-enterprise:configure ${assembleParameters}"
             }
         }
         stage('Deploy proxy bundle') {
             steps {
-              sh "mvn apigee-enterprise:deploy ${assembleParameters()}"
+              sh "mvn apigee-enterprise:deploy ${assembleParameters}"
             }
         }
         stage('Post-Deployment Configurations') {
           steps {
-            sh "mvn apigee-config:apiproducts apigee-config:developers apigee-config:apps ${assembleParameters()} -Dapigee.config.dir=target/resources/edge -Dapigee.config.options=create"
+            sh "mvn apigee-config:apiproducts apigee-config:developers apigee-config:apps ${assembleParameters} -Dapigee.config.dir=target/resources/edge -Dapigee.config.options=create"
           }
         }
         stage('Export Dev App Keys') {
           steps {
-            sh "mvn apigee-config:exportAppKeys -${assembleParameters()} -Dapigee.config.dir=target/resources/edge -Dapigee.config.exportDir=./target/test/integration"
+            sh "mvn apigee-config:exportAppKeys -${assembleParameters} -Dapigee.config.dir=target/resources/edge -Dapigee.config.exportDir=./target/test/integration"
           }
         }
         /**
