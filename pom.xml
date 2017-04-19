@@ -55,6 +55,21 @@
       </properties>
     </profile>
     <profile>
+      <id>rccl_test</id>
+      <properties>
+        <apigee.profile>rccl_test</apigee.profile>
+        <apigee.env>test</apigee.env>
+        <apigee.hosturl>c</apigee.hosturl>
+        <apigee.apiversion>v1</apigee.apiversion>
+        <apigee.org>${org}</apigee.org>
+        <apigee.username>${username}</apigee.username>
+        <apigee.password>${password}</apigee.password>
+        <apigee.options>update</apigee.options>
+        <api.northbound.domain>${org}-test.apigee.net</api.northbound.domain>
+        <api.testtag>~@wip</api.testtag>
+      </properties>
+    </profile>
+    <profile>
       <id>prod</id>
       <properties>
         <apigee.profile>prod</apigee.profile>
