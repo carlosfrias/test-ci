@@ -53,10 +53,12 @@ pipeline {
           steps {
             sh "mvn apigee-config:apiproducts -P${params.profile} -Dorg=${params.org} -Dusername=${params.username} -Dpassword=\"${params.password}\" -Dapigee.config.dir=target/resources/edge -Dapigee.config.options=create"
           }
+        }
         stage('Post-Deployment Configurations for Developer Configurations') {
           steps {
             sh "mvn apigee-config:developers -P${params.profile} -Dorg=${params.org} -Dusername=${params.username} -Dpassword=\"${params.password}\" -Dapigee.config.dir=target/resources/edge -Dapigee.config.options=create"
           }
+        }
         stage('Post-Deployment Configurations for Apps Configuration') {
           steps {
             sh "mvn apigee-config:apps -P${params.profile} -Dorg=${params.org} -Dusername=${params.username} -Dpassword=\"${params.password}\" -Dapigee.config.dir=target/resources/edge -Dapigee.config.options=create"
