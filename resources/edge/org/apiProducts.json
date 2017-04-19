@@ -12,8 +12,6 @@
         "description": "Currency Product",
         "displayName": "Currency Product",
         "environments": [
-            "test",
-            "prod",
             "dev"
         ],
         "proxies": [
