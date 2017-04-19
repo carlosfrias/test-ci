@@ -52,9 +52,9 @@
 		<URL>http://api.fixer.io/{flow.target.resource}</URL>
 	</HTTPTargetConnection> -->
 	<HTTPTargetConnection>
-        <LoadBalancer>
-            <Server name="APIFixerTS"/>
-        </LoadBalancer>
+        <!--<LoadBalancer>-->
+            <!--<Server name="APIFixerTS"/>-->
+        <!--</LoadBalancer>-->
         <Path>/{flow.target.resource}</Path>
     </HTTPTargetConnection>
 
