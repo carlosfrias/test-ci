@@ -57,7 +57,7 @@
     <profile>
       <id>apigee_sample_test</id>
       <properties>
-        <apigee.profile>apigee_sample_test</apigee.profile>
+        <apigee.profile>test</apigee.profile>
         <apigee.env>test</apigee.env>
         <apigee.hosturl>https://api.enterprise.apigee.com</apigee.hosturl>
         <apigee.apiversion>v1</apigee.apiversion>
