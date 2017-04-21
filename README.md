@@ -2,7 +2,10 @@
 This is the test proxy that has been created to 
 showcase the usage of the Apigee Maven plugins, 
 in particular the [Apigee Maven Config Plugin](https://github.com/apigee/apigee-config-maven-plugin) 
-and the [Apigee Maven Deploy Plugin](https://github.com/apigee/apigee-deploy-maven-plugin).
+and the [Apigee Maven Deploy Plugin](https://github.com/apigee/apigee-deploy-maven-plugin). The usage
+of these Maven plugins have been integrated with a Jenkins Pipeline. This integration provides a
+concrete example of the use of best practices to achieve Continous Integration and Continous 
+Deployment.
     
 ## Jenkins Pipeline
 A [Jenkins Pipeline](README-JENKINSFILE.md) has been provided that demonstrates
