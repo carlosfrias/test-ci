@@ -3,6 +3,9 @@ This is the test proxy that has been created to
 showcase the usage of the Apigee Maven plugins, 
 in particular the [Apigee Maven Config Plugin](https://github.com/apigee/apigee-config-maven-plugin) 
 and the [Apigee Maven Deploy Plugin](https://github.com/apigee/apigee-deploy-maven-plugin).
+    
+## Jenkins Pipeline
+The [jenkins pipeline](README-JENKINSFILE.md) has been provided.
 
 ## Test Proxy Apigee Account Requirements
 This test proxy assumes that you have an Apigee Edge instance
@@ -62,9 +65,5 @@ as follows:
     -Dpassword={password} \
     -Dapigee-config.dir=target/resources/edge \
     -Dapigee.config.exportDir=./target/test/integration
-    
-## Jenkins Pipeline
-The [jenkins pipeline](README-JENKINSFILE.md) has been provided.
-
 
 For more info - checkout the [usage](usage.md) instructions
