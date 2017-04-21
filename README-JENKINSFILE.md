@@ -2,7 +2,7 @@
 
 This describes the Jenkinsfile used to define
 a Jenkins 2 Pipeline. The Jenkins Pipeline is required to be named 
-Jenkinsfile. The Jenkinsfile is required to be located at the root of
+[Jenkinsfile]. The Jenkinsfile is required to be located at the root of
 the repository. This Jenkinsfile follows the declarative
 pipeline style. 
 
