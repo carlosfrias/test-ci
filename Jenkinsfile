@@ -7,16 +7,9 @@ pipeline {
       nodejs 'NodeJS 6.10.2'
     }
     stages {
-        stage("Show tool versions") {
-            steps {
-                  sh "mvn --version"
-                  //sh 'npm --version'
-                  //sh 'node --version'
-            }
-        }
         stage('Clean') {
             steps {
-                sh "mvn clean"
+              sh "mvn clean"
             }
         }
         stage('Static Code Analysis, Unit Test and Coverage') {
@@ -49,12 +42,7 @@ pipeline {
               sh "mvn apigee-enterprise:deploy -P${params.profile} -Ddeployment.suffix=${params.deployment_suffix} -Dorg=${params.org} -Dusername=${params.username} -Dpassword=\"${params.password}\""
             }
         }
-        stage('Post-Deployment Configurations for API Products Configurations') {
-          steps {
-            sh "mvn apigee-config:apiproducts -P${params.profile} -Dorg=${params.org} -Dusername=${params.username} -Dpassword=\"${params.password}\" -Dapigee.config.dir=target/resources/edge -Dapigee.config.options=create"
-          }
-        }
-        stage('Post-Deployment Configurations for Developer Configurations') {
+        stage('Post-Deployment Configurations for App Developer') {
           steps {
             sh "mvn apigee-config:developers -P${params.profile} -Dorg=${params.org} -Dusername=${params.username} -Dpassword=\"${params.password}\" -Dapigee.config.dir=target/resources/edge -Dapigee.config.options=create"
           }
@@ -62,6 +50,11 @@ pipeline {
         stage('Post-Deployment Configurations for Apps Configuration') {
           steps {
             sh "mvn apigee-config:apps -P${params.profile} -Dorg=${params.org} -Dusername=${params.username} -Dpassword=\"${params.password}\" -Dapigee.config.dir=target/resources/edge -Dapigee.config.options=create"
+          }
+        }
+        stage('Post-Deployment Configurations for API Products Configurations') {
+          steps {
+            sh "mvn apigee-config:apiproducts -P${params.profile} -Dorg=${params.org} -Dusername=${params.username} -Dpassword=\"${params.password}\" -Dapigee.config.dir=target/resources/edge -Dapigee.config.options=create"
           }
         }
         stage('Export Dev App Keys') {
@@ -72,7 +65,7 @@ pipeline {
         stage('Functional Test') {
           steps {
             sh "node ./node_modules/cucumber/bin/cucumber.js target/test/integration/features --format json:target/reports.json"
-            //sh "${mvnHome}/bin/mvn exec:exec@integration"
+            //sh "mvn exec:exec@integration"
           }
         }
         stage('Coverage Test Report') {
