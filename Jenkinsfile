@@ -65,7 +65,6 @@ pipeline {
         stage('Functional Test') {
           steps {
             sh "node ./node_modules/cucumber/bin/cucumber.js target/test/integration/features --format json:target/reports.json"
-            //sh "mvn exec:exec@integration"
           }
         }
         stage('Coverage Test Report') {
