@@ -1,6 +1,6 @@
 # Jenkins Pipeline
 
-This README describes the Jenkinsfile used to define
+This describes the Jenkinsfile used to define
 a Jenkins 2 Pipeline. This Jenkinsfile follows the declarative
 pipeline style. 
 
