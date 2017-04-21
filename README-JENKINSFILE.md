@@ -22,12 +22,12 @@ Jenkins Administration Console.
 
 ### Maven Tool Name
 Please note that the name of Maven configuration is expected to 
-be 'Maven 3.3.9'. If that is not the case then please adapt the name 
+be 'Maven 3.3.9'. If that is not the case then please adapt to the name 
 as provided by your installation.
 
 ### NodeJS Tool Name
 Please note that the name of the NodeJS configuration is expected to
-be 'NodeJS 6.10.2'. If that is not the case then please adapt the name 
+be 'NodeJS 6.10.2'. If that is not the case then please adapt to the name 
 as provided by your installation.
 
 ## Pipeline Stages
