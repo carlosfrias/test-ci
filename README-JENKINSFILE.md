@@ -61,9 +61,13 @@ Uses the Apigee Maven Config plugin to configure the cache.
 
 ### Pre-Deployment Configurations of the Target Servers
 Uses the Apigee Maven Config plugin to configure target servers.
+Requires [Organization Administrator](http://docs.apigee.com/api-services/content/organization-administrator-permissions)
+permissions.
 
 ### Pre-Deployment Configurations of the Key Value Maps
 Uses the Apigee Maven Config plugin to configure target servers.
+Requires [Organization Administrator](http://docs.apigee.com/api-services/content/organization-administrator-permissions)
+permissions.
 
 ### Build proxy bundle
 Uses the Apigee Maven Deployment plugin to build the proxy 

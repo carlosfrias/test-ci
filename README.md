@@ -19,7 +19,7 @@ public saas account or a private Apigee OPDK instance.
 ## Test Proxy Account Privilege Requirements
 This proxy will attempt to create Key Value Maps and Target
 Servers. The creation of Key Value Maps and Target Servers
-requires that your account have the Organization Administrator
+requires that your account have the [Organization Administrator](http://docs.apigee.com/api-services/content/organization-administrator-permissions)
 privilege. 
 
 ### Missing the Organization Administrator Privilege?
@@ -28,8 +28,8 @@ all other actions will work except creating Key Value Maps
 and Target Servers. Please see the provided [Jenkins Pipeline](README-JENKINSFILE.md)
 for more information regarding how to invoke goals individually. 
 
-Invoking goals that required Organization Administrator privilege can 
-be avoided by removing kvms.json and targetServers.json from 
+Invoking goals that required [Organization Administrator](http://docs.apigee.com/api-services/content/organization-administrator-permissions) 
+privilege can be avoided by removing kvms.json and targetServers.json from 
 the resources. If using an edge.json file then you can also remove kvm and 
 targetServer references from there as well.
 
