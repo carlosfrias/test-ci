@@ -98,7 +98,7 @@ report.
 
 ### Functional Test Report
 Uses the Jenkins plugin Cucumber Reports to render the results
- of the Cucumber functional tests.
+of the Cucumber functional tests.
 
 
 
