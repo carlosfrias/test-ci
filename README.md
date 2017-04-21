@@ -1,4 +1,4 @@
-# CI/CD Test Proxy
+# CI/CD Best Practices Test Proxy
 This is the test proxy that has been created to 
 showcase the usage of the Apigee Maven plugins, 
 in particular the [Apigee Maven Config Plugin](https://github.com/apigee/apigee-config-maven-plugin) 
