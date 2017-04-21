@@ -30,6 +30,7 @@ as provided by your installation.
 
 ## Pipeline Stages
 The following pipeline stages are declared:
+
 * Clean
 * Static Code Analysis, Unit Test and Coverage
 * Pre-Deployment Configurations of the Cache
