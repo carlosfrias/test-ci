@@ -5,7 +5,8 @@ in particular the [Apigee Maven Config Plugin](https://github.com/apigee/apigee-
 and the [Apigee Maven Deploy Plugin](https://github.com/apigee/apigee-deploy-maven-plugin).
     
 ## Jenkins Pipeline
-The [jenkins pipeline](README-JENKINSFILE.md) has been provided.
+A [Jenkins Pipeline](README-JENKINSFILE.md) has been provided that demonstrates
+the usage of this proxy.
 
 ## Test Proxy Apigee Account Requirements
 This test proxy assumes that you have an Apigee Edge instance
