@@ -18,7 +18,13 @@ privilege.
 ### Missing the Organization Administrator Privilege?
 If you do not have this privilege, then note that 
 all other actions will work except creating Key Value Maps
-and Target Servers. 
+and Target Servers. Please see the provided [jenkins pipeline](README-JENKINSFILE.md)
+for examples of how to invoke goals individually. 
+
+Invoking goals that required Organization Administrator privilege can 
+be avoided by removing kvms.json and targetServers.json from 
+the resources. If using an edge.json file then you can also remove kvm and 
+targetServer references from there as well.
 
 ### Basic Usage
 The plugin will need to be provided with the Apigee Edge 
