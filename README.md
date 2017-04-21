@@ -3,7 +3,7 @@ This is the test proxy that has been created to
 showcase the usage of the Apigee Maven plugins, 
 in particular the [Apigee Maven Config Plugin](https://github.com/apigee/apigee-config-maven-plugin) 
 and the [Apigee Maven Deploy Plugin](https://github.com/apigee/apigee-deploy-maven-plugin). The usage
-of these Maven plugins have been integrated with a Jenkins Pipeline. This integration provides a
+of these Maven plugins have been integrated with a [Jenkins Pipeline](README-JENKINSFILE.md). This integration provides a
 concrete example of the use of best practices to achieve Continous Integration and Continous 
 Deployment.
     
@@ -25,8 +25,8 @@ privilege.
 ### Missing the Organization Administrator Privilege?
 If you do not have this privilege, then note that 
 all other actions will work except creating Key Value Maps
-and Target Servers. Please see the provided [jenkins pipeline](README-JENKINSFILE.md)
-for examples of how to invoke goals individually. 
+and Target Servers. Please see the provided [Jenkins Pipeline](README-JENKINSFILE.md)
+for more information regarding how to invoke goals individually. 
 
 Invoking goals that required Organization Administrator privilege can 
 be avoided by removing kvms.json and targetServers.json from 
