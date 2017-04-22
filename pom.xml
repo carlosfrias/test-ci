@@ -55,7 +55,7 @@
       </properties>
     </profile>
     <profile>
-      <id>apigee_sample_test</id>
+      <id>local_workstation</id>
       <properties>
         <apigee.profile>test</apigee.profile>
         <apigee.env>test</apigee.env>
