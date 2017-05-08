@@ -44,7 +44,7 @@
       <properties>
         <apigee.profile>dev</apigee.profile>
         <apigee.env>dev</apigee.env>
-        <apigee.hosturl>http://rhldcapimmscs701.na.rccl.com:8080</apigee.hosturl>
+        <apigee.hosturl>https://api.enterprise.apigee.com</apigee.hosturl>
         <apigee.apiversion>v1</apigee.apiversion>
         <apigee.org>${org}</apigee.org>
         <apigee.username>${username}</apigee.username>
@@ -56,6 +56,21 @@
     </profile>
     <profile>
       <id>local</id>
+      <properties>
+        <apigee.profile>test</apigee.profile>
+        <apigee.env>test</apigee.env>
+        <apigee.hosturl>https://api.enterprise.apigee.com</apigee.hosturl>
+        <apigee.apiversion>v1</apigee.apiversion>
+        <apigee.org>${org}</apigee.org>
+        <apigee.username>${username}</apigee.username>
+        <apigee.password>${password}</apigee.password>
+        <apigee.options>update</apigee.options>
+        <api.northbound.domain>${org}-test.apigee.net</api.northbound.domain>
+        <api.testtag>~@wip</api.testtag>
+      </properties>
+    </profile>
+    <profile>
+      <id>test</id>
       <properties>
         <apigee.profile>test</apigee.profile>
         <apigee.env>test</apigee.env>
