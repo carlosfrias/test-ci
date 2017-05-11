@@ -3,8 +3,8 @@
 pipeline {
     agent any
     tools {
-      maven 'Maven 3.3.9'
-      nodejs 'NodeJS 6.10.2'
+      maven 'Maven'
+      nodejs 'NodeJS'
     }
     stages {
         stage('Clean') {
