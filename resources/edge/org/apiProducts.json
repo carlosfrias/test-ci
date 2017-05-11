@@ -12,7 +12,7 @@
         "description": "Currency Product",
         "displayName": "Currency Product",
         "environments": [
-            "dev"
+            "test"
         ],
         "proxies": [
             "currency-v1"
