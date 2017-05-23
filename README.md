@@ -69,3 +69,4 @@ as follows:
     -Dpassword={password} \
     -Dapigee-config.dir=target/resources/edge \
     -Dapigee.config.exportDir=./target/test/integration
+
